@@ -14,11 +14,19 @@ export function useStaffRole(email: string | null) {
       return
     }
     setLoading(true)
-    const unsubscribe = onSnapshot(doc(db, 'staff', email), (snapshot) => {
-      const data = snapshot.data()
-      setRole(data ? (data.role as StaffRole) : null)
-      setLoading(false)
-    })
+    const unsubscribe = onSnapshot(
+      doc(db, 'staff', email),
+      (snapshot) => {
+        const data = snapshot.data()
+        setRole(data ? (data.role as StaffRole) : null)
+        setLoading(false)
+      },
+      (error) => {
+        console.error('Failed to look up staff role:', error)
+        setRole(null)
+        setLoading(false)
+      }
+    )
     return unsubscribe
   }, [email])
 

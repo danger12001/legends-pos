@@ -1,0 +1,30 @@
+.shift-content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.stock-take-table,
+.stock-take-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.stock-take-table th,
+.stock-take-table td,
+.stock-take-summary th,
+.stock-take-summary td {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.stock-take-table input {
+  width: 4rem;
+}
+
+.stock-take-summary tr.variance {
+  color: #b00;
+  font-weight: 600;
+}

@@ -14,3 +14,7 @@ body {
 button {
   font-family: inherit;
 }
+
+.table-scroll {
+  overflow-x: auto;
+}

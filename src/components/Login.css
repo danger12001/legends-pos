@@ -12,3 +12,9 @@
   font-size: 1rem;
   cursor: pointer;
 }
+
+.login-unauthorized {
+  color: #b00;
+  max-width: 300px;
+  text-align: center;
+}

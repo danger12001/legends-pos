@@ -1,40 +1,36 @@
-.products-content {
-  max-width: 800px;
+.staff-content {
+  max-width: 700px;
   margin: 0 auto;
   padding: 1.5rem;
 }
 
-.product-form {
+.staff-form {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
 
-.product-form input {
+.staff-form input {
   padding: 0.4rem;
-  flex: 1 1 110px;
+  flex: 1 1 200px;
   min-width: 0;
 }
 
-.products-table {
+.staff-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.products-table th,
-.products-table td {
+.staff-table th,
+.staff-table td {
   text-align: left;
   padding: 0.5rem;
   border-bottom: 1px solid #eee;
 }
 
-.products-table input {
-  width: 4rem;
-}
-
 @media (max-width: 480px) {
-  .products-content {
+  .staff-content {
     padding: 1rem;
   }
 }

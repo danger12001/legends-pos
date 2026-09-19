@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 import './NavBar.css'
 
 export function NavBar() {
-  const { user, signOut } = useAuth()
+  const { user, role, signOut } = useAuth()
 
   return (
     <nav className="navbar">
@@ -13,6 +13,7 @@ export function NavBar() {
         </NavLink>
         <NavLink to="/products">Products</NavLink>
         <NavLink to="/shift">Shift</NavLink>
+        {role === 'admin' && <NavLink to="/staff">Staff</NavLink>}
       </div>
       <div className="navbar-user">
         <span>{user?.displayName}</span>

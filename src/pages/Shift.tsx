@@ -58,26 +58,28 @@ export function Shift() {
             {closedSummary && (
               <div className="stock-take-summary">
                 <h2>Last shift's stock take</h2>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Expected</th>
-                      <th>Counted</th>
-                      <th>Variance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {closedSummary.map((line) => (
-                      <tr key={line.productId} className={line.variance !== 0 ? 'variance' : ''}>
-                        <td>{line.name}</td>
-                        <td>{line.expected}</td>
-                        <td>{line.counted}</td>
-                        <td>{line.variance > 0 ? `+${line.variance}` : line.variance}</td>
+                <div className="table-scroll">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Product</th>
+                        <th>Expected</th>
+                        <th>Counted</th>
+                        <th>Variance</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {closedSummary.map((line) => (
+                        <tr key={line.productId} className={line.variance !== 0 ? 'variance' : ''}>
+                          <td>{line.name}</td>
+                          <td>{line.expected}</td>
+                          <td>{line.counted}</td>
+                          <td>{line.variance > 0 ? `+${line.variance}` : line.variance}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </>
@@ -90,37 +92,39 @@ export function Shift() {
             </p>
 
             <h2>Stock take</h2>
-            <table className="stock-take-table">
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Expected</th>
-                  <th>Counted</th>
-                  <th>Variance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => {
-                  const counted = counts[product.id]
-                  const variance = counted?.trim() ? Number(counted) - product.stock : null
-                  return (
-                    <tr key={product.id}>
-                      <td>{product.name}</td>
-                      <td>{product.stock}</td>
-                      <td>
-                        <input
-                          type="number"
-                          min="0"
-                          value={counted ?? ''}
-                          onChange={(e) => setCounts((prev) => ({ ...prev, [product.id]: e.target.value }))}
-                        />
-                      </td>
-                      <td>{variance === null ? '' : variance > 0 ? `+${variance}` : variance}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+            <div className="table-scroll">
+              <table className="stock-take-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Expected</th>
+                    <th>Counted</th>
+                    <th>Variance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product) => {
+                    const counted = counts[product.id]
+                    const variance = counted?.trim() ? Number(counted) - product.stock : null
+                    return (
+                      <tr key={product.id}>
+                        <td>{product.name}</td>
+                        <td>{product.stock}</td>
+                        <td>
+                          <input
+                            type="number"
+                            min="0"
+                            value={counted ?? ''}
+                            onChange={(e) => setCounts((prev) => ({ ...prev, [product.id]: e.target.value }))}
+                          />
+                        </td>
+                        <td>{variance === null ? '' : variance > 0 ? `+${variance}` : variance}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
 
             <button type="button" disabled={!allCounted || busy} onClick={() => void handleEnd(activeShift)}>
               {busy ? 'Processing...' : 'End shift'}

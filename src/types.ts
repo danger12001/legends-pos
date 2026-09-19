@@ -50,3 +50,12 @@ export interface Shift {
   endedByName?: string
   stockTake?: StockTakeLine[]
 }
+
+export type StaffRole = 'staff' | 'admin'
+
+export interface StaffMember {
+  email: string
+  role: StaffRole
+  addedAt: number
+  addedByName: string
+}

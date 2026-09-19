@@ -173,3 +173,31 @@
   opacity: 0.5;
 }
 
+@media (max-width: 640px) {
+  .tab-strip {
+    padding: 0.6rem 1rem;
+  }
+
+  .new-tab-form {
+    margin-left: 0;
+    flex: 1 1 100%;
+  }
+
+  .new-tab-form input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pos-content {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .cart {
+    width: 100%;
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+  }
+}

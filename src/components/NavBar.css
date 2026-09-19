@@ -1,7 +1,9 @@
 .navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-bottom: 1px solid #ddd;
 }
@@ -25,4 +27,17 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.navbar-user span {
+  max-width: 30vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.6rem 1rem;
+  }
 }

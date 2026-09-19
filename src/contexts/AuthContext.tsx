@@ -1,10 +1,14 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { onAuthStateChanged, signInWithPopup, signOut as firebaseSignOut, type User } from 'firebase/auth'
 import { auth, googleProvider } from '../firebase'
+import { useStaffRole } from '../hooks/useStaffRole'
+import type { StaffRole } from '../types'
 
 interface AuthContextValue {
   user: User | null
+  role: StaffRole | null
   loading: boolean
+  unauthorized: boolean
   signInWithGoogle: () => Promise<void>
   signOut: () => Promise<void>
 }
@@ -13,17 +17,27 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [authLoading, setAuthLoading] = useState(true)
+  const [unauthorized, setUnauthorized] = useState(false)
+  const { role, loading: roleLoading } = useStaffRole(user?.email ?? null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser)
-      setLoading(false)
+      setAuthLoading(false)
     })
     return unsubscribe
   }, [])
 
+  useEffect(() => {
+    if (user && !roleLoading && role === null) {
+      setUnauthorized(true)
+      void firebaseSignOut(auth)
+    }
+  }, [user, role, roleLoading])
+
   const signInWithGoogle = async () => {
+    setUnauthorized(false)
     await signInWithPopup(auth, googleProvider)
   }
 
@@ -31,8 +45,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await firebaseSignOut(auth)
   }
 
+  const loading = authLoading || (!!user && roleLoading)
+
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signOut }}>
+    <AuthContext.Provider value={{ user, role, loading, unauthorized, signInWithGoogle, signOut }}>
       {children}
     </AuthContext.Provider>
   )

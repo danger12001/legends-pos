@@ -13,6 +13,8 @@
 
 .product-form input {
   padding: 0.4rem;
+  flex: 1 1 110px;
+  min-width: 0;
 }
 
 .products-table {
@@ -29,4 +31,10 @@
 
 .products-table input {
   width: 4rem;
+}
+
+@media (max-width: 480px) {
+  .products-content {
+    padding: 1rem;
+  }
 }

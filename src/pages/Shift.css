@@ -28,3 +28,9 @@
   color: #b00;
   font-weight: 600;
 }
+
+@media (max-width: 480px) {
+  .shift-content {
+    padding: 1rem;
+  }
+}

@@ -58,39 +58,41 @@ export function Products() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <table className="products-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>SKU</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.sku}</td>
-                  <td>{formatPrice(product.price)}</td>
-                  <td>
-                    <input
-                      type="number"
-                      min="0"
-                      value={product.stock}
-                      onChange={(e) => void updateProduct(product.id, { stock: Number(e.target.value) })}
-                    />
-                  </td>
-                  <td>
-                    <button type="button" onClick={() => void deleteProduct(product.id)}>
-                      Delete
-                    </button>
-                  </td>
+          <div className="table-scroll">
+            <table className="products-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>SKU</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.id}>
+                    <td>{product.name}</td>
+                    <td>{product.sku}</td>
+                    <td>{formatPrice(product.price)}</td>
+                    <td>
+                      <input
+                        type="number"
+                        min="0"
+                        value={product.stock}
+                        onChange={(e) => void updateProduct(product.id, { stock: Number(e.target.value) })}
+                      />
+                    </td>
+                    <td>
+                      <button type="button" onClick={() => void deleteProduct(product.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>
